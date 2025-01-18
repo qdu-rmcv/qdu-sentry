@@ -16,7 +16,7 @@ robot_state_publisher REQUIRED
 # find_package(<dependency> REQUIRED)
 
 install(DIRECTORY urdf/ DESTINATION share/${PROJECT_NAME}//urdf)
-install(DIRCTORY launch/ DESTINATION share/${PROJECT_NAME}/launch)
+install(DIRECTORY launch/ DESTINATION share/${PROJECT_NAME}/launch)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
