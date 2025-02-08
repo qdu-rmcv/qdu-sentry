@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.12)  # 确保 CMake 版本支持此策略
+cmake_policy(SET CMP0074 NEW)  # 使用新的策略行为
 project(fast_lio)
 
 if(NOT CMAKE_BUILD_TYPE)
