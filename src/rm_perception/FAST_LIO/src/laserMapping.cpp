@@ -506,7 +506,7 @@ void publish_frame_world(rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::Share
         pcl::toROSMsg(*laserCloudWorld, laserCloudmsg);
         // laserCloudmsg.header.stamp = ros::Time().fromSec(lidar_end_time);
         laserCloudmsg.header.stamp = get_ros_time(lidar_end_time);
-        laserCloudmsg.header.frame_id = "camera_init";
+        laserCloudmsg.header.frame_id = "chasis_odom";
         pubLaserCloudFull->publish(laserCloudmsg);
         publish_count -= PUBFRAME_PERIOD;
     }
@@ -558,7 +558,7 @@ void publish_frame_body(rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::Shared
     sensor_msgs::msg::PointCloud2 laserCloudmsg;
     pcl::toROSMsg(*laserCloudIMUBody, laserCloudmsg);
     laserCloudmsg.header.stamp = get_ros_time(lidar_end_time);
-    laserCloudmsg.header.frame_id = "body";
+    laserCloudmsg.header.frame_id = "base_link";
     pubLaserCloudFull_body->publish(laserCloudmsg);
     publish_count -= PUBFRAME_PERIOD;
 }
@@ -575,7 +575,7 @@ void publish_effect_world(rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::Shar
     sensor_msgs::msg::PointCloud2 laserCloudFullRes3;
     pcl::toROSMsg(*laserCloudWorld, laserCloudFullRes3);
     laserCloudFullRes3.header.stamp = get_ros_time(lidar_end_time);
-    laserCloudFullRes3.header.frame_id = "camera_init";
+    laserCloudFullRes3.header.frame_id = "chasis_odom";
     pubLaserCloudEffect->publish(laserCloudFullRes3);
 }
 
@@ -597,13 +597,13 @@ void publish_map(rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr pub
     pcl::toROSMsg(*pcl_wait_pub, laserCloudmsg);
     // laserCloudmsg.header.stamp = ros::Time().fromSec(lidar_end_time);
     laserCloudmsg.header.stamp = get_ros_time(lidar_end_time);
-    laserCloudmsg.header.frame_id = "camera_init";
+    laserCloudmsg.header.frame_id = "chasis_odom";
     pubLaserCloudMap->publish(laserCloudmsg);
 
     sensor_msgs::msg::PointCloud2 laserCloudMap;
     // pcl::toROSMsg(*featsFromMap, laserCloudMap);
     // laserCloudMap.header.stamp = get_ros_time(lidar_end_time);
-    // laserCloudMap.header.frame_id = "camera_init";
+    // laserCloudMap.header.frame_id = "chasis_odom";
     // pubLaserCloudMap->publish(laserCloudMap);
 }
 
@@ -628,8 +628,8 @@ void set_posestamp(T & out)
 
 void publish_odometry(const rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr pubOdomAftMapped, std::unique_ptr<tf2_ros::TransformBroadcaster> & tf_br)
 {
-    odomAftMapped.header.frame_id = "camera_init";
-    odomAftMapped.child_frame_id = "body";
+    odomAftMapped.header.frame_id = "chasis_odom";
+    odomAftMapped.child_frame_id = "base_link";
     odomAftMapped.header.stamp = get_ros_time(lidar_end_time);
     set_posestamp(odomAftMapped.pose);
     pubOdomAftMapped->publish(odomAftMapped);
@@ -646,9 +646,9 @@ void publish_odometry(const rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPt
     }
 
     geometry_msgs::msg::TransformStamped trans;
-    trans.header.frame_id = "camera_init";
+    trans.header.frame_id = "chasis_odom";
     trans.header.stamp = odomAftMapped.header.stamp;
-    trans.child_frame_id = "body";
+    trans.child_frame_id = "base_link";
     trans.transform.translation.x = odomAftMapped.pose.pose.position.x;
     trans.transform.translation.y = odomAftMapped.pose.pose.position.y;
     trans.transform.translation.z = odomAftMapped.pose.pose.position.z;
@@ -663,7 +663,7 @@ void publish_path(rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr pubPath)
 {
     set_posestamp(msg_body_pose);
     msg_body_pose.header.stamp = get_ros_time(lidar_end_time); // ros::Time().fromSec(lidar_end_time);
-    msg_body_pose.header.frame_id = "camera_init";
+    msg_body_pose.header.frame_id = "chasis_odom";
 
     /*** if path is too large, the rvis will crash ***/
     static int jjj = 0;
@@ -874,7 +874,7 @@ public:
         RCLCPP_INFO(this->get_logger(), "p_pre->lidar_type %d", p_pre->lidar_type);
 
         path.header.stamp = this->get_clock()->now();
-        path.header.frame_id ="camera_init";
+        path.header.frame_id ="chasis_odom";
 
         // /*** variables definition ***/
         // int effect_feat_num = 0, frame_num = 0;
@@ -932,34 +932,34 @@ public:
         1. /cloud_registered
            - 发布已配准的点云（转换到世界坐标系）
            - 根据dense_pub_en参数发布原始或降采样点云
-           - 坐标系ID: "camera_init"
+           - 坐标系ID: "chasis_odom"
 
         2. /cloud_registered_body
            - 发布IMU/机体坐标系下的点云
            - 用于机器人机体相对位置可视化
-           - 坐标系ID: "body"
+           - 坐标系ID: "base_link"
 
         3. /cloud_effected
            - 发布用于位姿估计的有效特征点
            - 包含用于ICP匹配和EKF更新的点
-           - 坐标系ID: "camera_init"
+           - 坐标系ID: "chasis_odom"
 
         4. /Laser_map
            - 发布已构建的地图点云
            - 包含累积的点云数据
            - 用于全局地图可视化
-           - 坐标系ID: "camera_init"
+           - 坐标系ID: "chasis_odom"
 
         5. /Odometry
            - 发布包含位姿和速度估计的里程计信息
            - 包含协方差矩阵
-           - 坐标系ID: "camera_init"
-           - 子坐标系ID: "body"
+           - 坐标系ID: "chasis_odom"
+           - 子坐标系ID: "base_link"
 
         6. /path
            - 发布机器人轨迹
            - 每10帧保存一次位姿以限制数据量
-           - 坐标系ID: "camera_init"
+           - 坐标系ID: "chasis_odom"
         */
 
         sub_imu_ = this->create_subscription<sensor_msgs::msg::Imu>(imu_topic, 10, imu_cbk);

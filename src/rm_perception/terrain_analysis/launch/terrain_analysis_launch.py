@@ -72,7 +72,7 @@ def generate_launch_description():
                 # 每个区块的最小有效点数
                 "min_block_point_num": 10,
                 # 车辆高度（米）
-                "vehicle_height": 0.5,
+                "vehicle_height": 0.4,
                 # 体素更新点数阈值
                 "voxel_point_update_thre": 100,
                 # 体素更新时间阈值（秒）

@@ -95,10 +95,10 @@ TerrainAnalysisNode::TerrainAnalysisNode(const rclcpp::NodeOptions & options)
 
   //fastlio里程计与点云订阅
   odometry_sub_ = create_subscription<nav_msgs::msg::Odometry>(
-    "/Odometry", 5,
+    "livox/imu", 5,
     std::bind(&TerrainAnalysisNode::odometryHandler, this, std::placeholders::_1));
   laser_cloud_sub_ = create_subscription<sensor_msgs::msg::PointCloud2>(
-    "/cloud_registered", 5,
+    "livox/lidar", 5,
     std::bind(&TerrainAnalysisNode::laserCloudHandler, this, std::placeholders::_1));
 
   //手柄控制信号清除点云
@@ -108,7 +108,7 @@ TerrainAnalysisNode::TerrainAnalysisNode(const rclcpp::NodeOptions & options)
   clearing_sub_ = create_subscription<example_interfaces::msg::Float32>(
     "map_clearing", 5,
     std::bind(&TerrainAnalysisNode::clearingHandler, this, std::placeholders::_1));
-  //分割后点云的发布
+  //分割后障碍物点云的发布
   terrain_map_pub_ = create_publisher<sensor_msgs::msg::PointCloud2>("terrain_map", 2);
 
   for (auto & i : terrain_voxel_cloud_) {
