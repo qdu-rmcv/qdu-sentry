@@ -98,7 +98,7 @@ TerrainAnalysisNode::TerrainAnalysisNode(const rclcpp::NodeOptions & options)
     "livox/imu", 5,
     std::bind(&TerrainAnalysisNode::odometryHandler, this, std::placeholders::_1));
   laser_cloud_sub_ = create_subscription<sensor_msgs::msg::PointCloud2>(
-    "livox/lidar", 5,
+    "livox/lidar/pointcloud", 5,
     std::bind(&TerrainAnalysisNode::laserCloudHandler, this, std::placeholders::_1));
 
   //手柄控制信号清除点云

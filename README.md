@@ -1,19 +1,23 @@
 # 青岛大学哨兵项目
 
-青岛大学未来战队25赛季哨兵
+青岛大学未来战队 25 赛季哨兵
 
-本项目高度参照FYT与PB哨兵项目
-使用全向移动小车，附加 Livox Mid360 雷达，在 RMUC/RMUL 地图进行导航算法
+本项目高度参照 FYT 与 PB 哨兵项目，采用全向移动小车和 Livox Mid360 雷达，在 **RMUC/RMUL** 地图环境下实现导航算法。
 
-项目使用FASTLIO2进行建图定位,[TODO：调整成为PointLIO,以期待实现更好的鲁棒性] 
-然后借助terrain_analysis实现点云分割，分割后的障碍物输入转换话题转化为2维对象并输入[Nav，amcl]
+## 系统架构
 
-[TODO]
-1. nav包的调用与调试
+- 使用 **FASTLIO2** 进行建图与定位  
+    > [TODO] 调整为 PointLIO 以期待实现更好的鲁棒性
+- 利用 **terrain_analysis** 实现点云分割  
+    分割后的障碍物会转换为二维对象，并通过相应话题输入给导航（Nav）和 AMCL 模块
 
-2. 使用icp与amcl的融合重定位
+## 后续开发计划
 
-3. 决策的更改
+1. 调试与调用 nav 包
+2. 实现 ICP 与 AMCL 融合的重定位
+3. 修改与优化决策模块
 
-QA:
-注意海康相机MVS，具体见github issues
+## 注意事项
+
+- 海康 MVS 相机使用方法，详见 [GitHub Issues](https://github.com)
+- ICP 模块使用了绝对路径引用，请特别注意调整和维护

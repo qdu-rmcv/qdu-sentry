@@ -19,7 +19,7 @@
 #include <string>
 #include <thread>
 #include <vector>
-#include <fstream> 
+#include <fstream>
 #include <iomanip>
 
 #include "geometry_msgs/msg/twist.hpp"
