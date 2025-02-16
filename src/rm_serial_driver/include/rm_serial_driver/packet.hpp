@@ -59,7 +59,7 @@ struct SendPacket
   float vx;
   float vy;
   float wz;
-  
+
   uint16_t checksum = 0;
 } __attribute__((packed));
 
