@@ -13,11 +13,11 @@
 
 ## 后续开发计划
 
-1. 调试与调用 nav 包
-2. 实现 ICP 与 AMCL 融合的重定位
-3. 修改与优化决策模块
+- [ ] 调试与调用 nav 包
+- [ ] 实现 ICP 与 AMCL 融合的重定位
+- [ ] 修改与优化决策模块
 
 ## 注意事项
 
-- 海康 MVS 相机使用方法，详见 [GitHub Issues](https://github.com)
+- 海康 MVS 相机使用方法，详见 [GitHub Issues](https://github.com/orgs/qdu-rmcv/discussions/2)
 - ICP 模块使用了绝对路径引用，请特别注意调整和维护

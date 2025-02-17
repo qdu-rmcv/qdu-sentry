@@ -218,7 +218,7 @@ void RMSerialDriver::sendData(const auto_aim_interfaces::msg::Send::SharedPtr ms
     packet.gimbal.pit=packet.pitch;
     packet.gimbal.yaw=packet.yaw;
     packet.gimbal.rol=0;
-    packet.checksum=crc16::CRC16_Calc(reinterpret_cast<uint8_t *>(&packet), sizeof(packet), UINT16_MAX); 
+    packet.checksum=crc16::CRC16_Calc(reinterpret_cast<uint8_t *>(&packet), sizeof(packet), UINT16_MAX);
 
     // 打印 data 结构体中的 xyz 和 yaw 值
     // std::cout << "xyz: (" << packet.x << ", " << packet.y << ", " << packet.z << ")" << std::endl;
@@ -460,8 +460,6 @@ float RMSerialDriver::yaw_trans(float originAngle){
     else 
       originAngle = 2 * M_PI - originAngle;
     return originAngle;
-
-
 }
 float RMSerialDriver::yaw_re_trans(float originAngle){
 

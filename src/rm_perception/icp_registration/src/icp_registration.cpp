@@ -66,7 +66,7 @@ IcpNode::IcpNode(const rclcpp::NodeOptions &options)
   odom_frame_id_ =
       this->declare_parameter("odom_frame_id", std::string("odom"));
   range_odom_frame_id_ =
-      this->declare_parameter("range_odom_frame_id", std::string("lidar_odom"));
+      this->declare_parameter("range_odom_frame_id", std::string("livox_frame"));
   laser_frame_id_ =
       this->declare_parameter("laser_frame_id", std::string("laser"));
   thresh_ = this->declare_parameter("thresh", 0.15);

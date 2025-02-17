@@ -73,7 +73,7 @@ source install/setup.sh
 ros2 launch livox_ros_driver2 [launch file]
 ```
 
-in which,  
+in which,
 
 * **[launch file]** : is the ROS2 launch file you want to use; the 'launch_ROS2' folder contains several launch samples for your reference.
 
