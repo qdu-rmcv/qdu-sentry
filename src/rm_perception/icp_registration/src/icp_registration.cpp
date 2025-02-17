@@ -64,7 +64,7 @@ IcpNode::IcpNode(const rclcpp::NodeOptions &options)
   // Parameters
   map_frame_id_ = this->declare_parameter("map_frame_id", std::string("map"));
   odom_frame_id_ =
-      this->declare_parameter("odom_frame_id", std::string("chasis_odom"));
+      this->declare_parameter("odom_frame_id", std::string("odom"));
   range_odom_frame_id_ =
       this->declare_parameter("range_odom_frame_id", std::string("livox_frame"));
   laser_frame_id_ =

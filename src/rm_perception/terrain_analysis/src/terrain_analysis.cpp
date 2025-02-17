@@ -95,11 +95,12 @@ TerrainAnalysisNode::TerrainAnalysisNode(const rclcpp::NodeOptions & options)
 
   //里程计与点云订阅(尝试，效果不好话查看fastlio的与odometry)
   odometry_sub_ = create_subscription<nav_msgs::msg::Odometry>(
-    "livox/imu", 5,
+    "Odometry", 5,
     std::bind(&TerrainAnalysisNode::odometryHandler, this, std::placeholders::_1));
   laser_cloud_sub_ = create_subscription<sensor_msgs::msg::PointCloud2>(
-    "livox/lidar/pointcloud", 5,
-    std::bind(&TerrainAnalysisNode::laserCloudHandler, this, std::placeholders::_1));
+      "livox/lidar/pointcloud", 5,
+      std::bind(&TerrainAnalysisNode::laserCloudHandler, this,
+                std::placeholders::_1));
 
   //手柄控制信号清除点云
   joystick_sub_ = create_subscription<sensor_msgs::msg::Joy>(

@@ -6,7 +6,6 @@
   <!-- 底盘部分 -->
   <link name="livox_frame" />
   <link name="base_link" />
-  <link name="yaw_link" />
 
   <!-- 激光雷达与底盘的固定关节 -->
   <joint name="base_joint" type="fixed">
@@ -17,8 +16,17 @@
   </joint>
 
   <!-- 云台部分 -->
-  <joint name="yaw_joint" type="continuous">
+  <link name="gimbal_odom" />
+  <joint name="gimbal_joint" type="fixed">
+    <origin xyz="0 0 0.1" rpy="0 0 0" />
     <parent link="base_link" />
+    <child link="gimbal_odom" />
+    <axis xyz="0 0 0" />
+  </joint>
+
+  <link name="yaw_link" />
+  <joint name="yaw_joint" type="continuous">
+    <parent link="gimbal_odom" />
     <child link="yaw_link" />
     <axis xyz="0 0 1" />
   </joint>

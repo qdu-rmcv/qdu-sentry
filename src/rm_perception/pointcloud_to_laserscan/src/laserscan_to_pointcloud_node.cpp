@@ -44,6 +44,7 @@
 #include <functional>
 #include <limits>
 #include <memory>
+#include <rmw/types.h>
 #include <string>
 #include <thread>
 #include <utility>
@@ -65,7 +66,8 @@ LaserScanToPointCloudNode::LaserScanToPointCloudNode(const rclcpp::NodeOptions &
   input_queue_size_ = this->declare_parameter(
     "queue_size", static_cast<int>(std::thread::hardware_concurrency()));
 
-  pub_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("cloud", rclcpp::SensorDataQoS().reliability(RMW_QOS_POLICY_RELIABILITY_BEST_EFFORT));
+  pub_ = this->create_publisher<sensor_msgs::msg::PointCloud2>(
+      "cloud", rclcpp::SensorDataQoS().reliability(RMW_QOS_POLICY_RELIABILITY_RELIABLE));
 
   using std::placeholders::_1;
   // if pointcloud target frame specified, we need to filter by transform availability

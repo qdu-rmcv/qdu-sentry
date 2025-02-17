@@ -460,8 +460,6 @@ float RMSerialDriver::yaw_trans(float originAngle){
     else 
       originAngle = 2 * M_PI - originAngle;
     return originAngle;
-
-
 }
 float RMSerialDriver::yaw_re_trans(float originAngle){
 

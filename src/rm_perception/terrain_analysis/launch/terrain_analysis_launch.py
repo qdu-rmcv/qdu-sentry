@@ -30,11 +30,11 @@ def generate_launch_description():
         parameters=[
             {
                 # 传感器坐标系名称
-                "sensor_frame": "chasis_odom",
+                "sensor_frame": "odom",
                 # 点云降采样的体素大小（米）
                 "scan_voxel_size": 0.05,
                 # 点云保留时间（秒）
-                "decay_time": 0.1,
+                "decay_time": 0.05,
                 # 车辆点云的有效检测距离（米）
                 "no_decay_dis": 1.75,
                 # 点云清除距离阈值（米）

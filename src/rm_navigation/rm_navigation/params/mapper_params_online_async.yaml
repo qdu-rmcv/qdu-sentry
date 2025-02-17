@@ -10,11 +10,11 @@ slam_toolbox:
     ceres_loss_function: None
 
     # ROS Parameters
-    odom_frame: chasis_odom
+    odom_frame: odom
     map_frame: map
     # base_frame: livox_frame
     # base_frame: base_link
-    base_frame: base_footprint
+    base_frame: livox_frame
     scan_topic: /scan
     mode: mapping #localization
 
