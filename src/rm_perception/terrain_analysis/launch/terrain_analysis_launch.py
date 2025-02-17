@@ -30,11 +30,11 @@ def generate_launch_description():
         parameters=[
             {
                 # 传感器坐标系名称
-                "sensor_frame": "body",
+                "sensor_frame": "chasis_odom",
                 # 点云降采样的体素大小（米）
                 "scan_voxel_size": 0.05,
                 # 点云保留时间（秒）
-                "decay_time": 1.0,
+                "decay_time": 0.1,
                 # 车辆点云的有效检测距离（米）
                 "no_decay_dis": 1.75,
                 # 点云清除距离阈值（米）
@@ -48,7 +48,7 @@ def generate_launch_description():
                 # 是否限制地面抬升
                 "limit_ground_lift": False,
                 # 最大地面抬升高度（米）
-                "max_ground_lift": 0.15,
+                "max_ground_lift": 0.6,
                 # 是否清除动态障碍物
                 "clear_dy_obs": True,
                 # 动态障碍物最小检测距离（米）

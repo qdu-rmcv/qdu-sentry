@@ -93,7 +93,7 @@ TerrainAnalysisNode::TerrainAnalysisNode(const rclcpp::NodeOptions & options)
     i = std::make_shared<pcl::PointCloud<pcl::PointXYZI>>();
   }
 
-  //里程计与点云订阅(尝试，效果不好话查看fastlio的body与odometry)
+  //里程计与点云订阅(尝试，效果不好话查看fastlio的与odometry)
   odometry_sub_ = create_subscription<nav_msgs::msg::Odometry>(
     "livox/imu", 5,
     std::bind(&TerrainAnalysisNode::odometryHandler, this, std::placeholders::_1));
