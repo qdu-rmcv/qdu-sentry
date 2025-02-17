@@ -5,11 +5,8 @@ cmds=(
 	"ros2 launch livox_ros_driver2 msg_MID360_launch.py"
 	"ros2 launch fast_lio mapping.launch.py"
 	"ros2 launch terrain_analysis terrain_analysis_launch.py"
-	
-
 	"ros2 launch rm_navigation online_async_launch.py "
 	"ros2 launch pointcloud_to_laserscan pointcloud_to_laserscan_launch.py"
-
 	"ros2 launch rm_navigation bringup_launch.py"
 	# "ros2 run rm_decision rm_decision_node"
 	)
