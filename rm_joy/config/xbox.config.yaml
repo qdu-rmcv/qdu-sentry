@@ -1,0 +1,11 @@
+rm_joy:
+  ros__parameters:
+    use_sim_time: false
+    robot_base_frame: base_link
+    control_mode: manual_control  # Option: auto_control, manual_control
+
+    enable button: 
+    axis_chassis:
+      x: 1                        # Left thumb stick vertical
+      y: 0                        # Left thumb stick horizontal
+      yaw: 6                      # button_left and button_right
