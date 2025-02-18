@@ -41,7 +41,6 @@ public:
   float yaw_trans(float originAngle);
   float yaw_re_trans(float originAngle);
 private:
-  // 在 RMSerialDriver 类的头文件中添加成员变量
   std::ofstream csv_file_;
 
   void getParams();
