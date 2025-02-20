@@ -30,25 +30,25 @@ def generate_launch_description():
         parameters=[
             {
                 # 传感器坐标系名称
-                "sensor_frame": "odom",
+                "sensor_frame": "livox_frame",
                 # 点云降采样的体素大小（米）
                 "scan_voxel_size": 0.05,
                 # 点云保留时间（秒）
                 "decay_time": 0.05,
                 # 车辆点云的有效检测距离（米）
-                "no_decay_dis": 1.75,
+                "no_decay_dis": 0.0,
                 # 点云清除距离阈值（米）
                 "clearing_dis": 0.0,
                 # 是否使用排序处理点云
                 "use_sorting": True,
                 # 地面高度分位数阈值（0-1）
-                "quantile_z": 0.5,
+                "quantile_z": 0.2,
                 # 是否考虑斜坡作为障碍物
                 "consider_drop": False,
                 # 是否限制地面抬升
                 "limit_ground_lift": False,
                 # 最大地面抬升高度（米）
-                "max_ground_lift": 0.6,
+                "max_ground_lift": 0.3,
                 # 是否清除动态障碍物
                 "clear_dy_obs": True,
                 # 动态障碍物最小检测距离（米）
@@ -76,7 +76,7 @@ def generate_launch_description():
                 # 体素更新点数阈值
                 "voxel_point_update_thre": 100,
                 # 体素更新时间阈值（秒）
-                "voxel_time_update_thre": 2.0,
+                "voxel_time_update_thre": 1.0,
                 # 点云裁剪的最小相对高度（米）
                 "min_rel_z": -1.5,
                 # 点云裁剪的最大相对高度（米）
