@@ -38,7 +38,7 @@ def generate_launch_description():
                 # 车辆点云的有效检测距离（米）
                 "no_decay_dis": 1.75,
                 # 点云清除距离阈值（米）
-                "clearing_dis": 8.0,
+                "clearing_dis": 0.0,
                 # 是否使用排序处理点云
                 "use_sorting": True,
                 # 地面高度分位数阈值（0-1）
