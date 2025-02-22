@@ -93,12 +93,11 @@ TerrainAnalysisNode::TerrainAnalysisNode(const rclcpp::NodeOptions & options)
     i = std::make_shared<pcl::PointCloud<pcl::PointXYZI>>();
   }
 
-  //里程计与点云订阅(尝试，效果不好话查看fastlio的与odometry)
   odometry_sub_ = create_subscription<nav_msgs::msg::Odometry>(
     "Odometry", 5,
     std::bind(&TerrainAnalysisNode::odometryHandler, this, std::placeholders::_1));
   laser_cloud_sub_ = create_subscription<sensor_msgs::msg::PointCloud2>(
-      "livox/lidar/pointcloud", 5,
+    "cloud_registered", 5,
       std::bind(&TerrainAnalysisNode::laserCloudHandler, this,
                 std::placeholders::_1));
 
@@ -594,7 +593,7 @@ void TerrainAnalysisNode::processLaserCloud()
   sensor_msgs::msg::PointCloud2 terrain_cloud;
   pcl::toROSMsg(*terrain_cloud_elev_, terrain_cloud);
   terrain_cloud.header.stamp = rclcpp::Time(static_cast<uint64_t>(laser_cloud_time_ * 1e9));
-  terrain_cloud.header.frame_id = "odom";
+  terrain_cloud.header.frame_id = "map";
 
   // 将点云转换到激光雷达坐标系
   sensor_msgs::msg::PointCloud2 terrain_cloud_lidar;

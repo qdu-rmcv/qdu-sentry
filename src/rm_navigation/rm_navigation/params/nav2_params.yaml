@@ -6,7 +6,7 @@ amcl:
     alpha3: 0.2
     alpha4: 0.2
     alpha5: 0.2
-    base_frame_id: "base_link"
+    base_frame_id: "odom"
     beam_skip_distance: 0.5
     beam_skip_error_threshold: 0.9
     beam_skip_threshold: 0.3
@@ -243,7 +243,7 @@ local_costmap:
     ros__parameters:
       update_frequency: 50.0
       publish_frequency: 20.0
-      global_frame: base_link
+      global_frame: map
       robot_base_frame: base_link
       use_sim_time: False
       rolling_window: true
@@ -254,12 +254,12 @@ local_costmap:
       plugins: ["obstacle_layer", "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 3.0
+        cost_scaling_factor: 10.0
         inflation_radius: 0.35
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
         enabled: True
-        observation_sources: livox 
+        observation_sources: livox
         max_obstacle_height: 1.0
         min_obstacle_height: -1.0
         # rplidar:

@@ -13,7 +13,6 @@
 
 ## 后续开发计划
 
-- [ ] 调试与调用 nav 包
 - [ ] 实现 ICP 与 AMCL 融合的重定位
 - [ ] 修改与优化决策模块
 
@@ -21,3 +20,11 @@
 
 - 海康 MVS 相机使用方法，详见 [GitHub Issues](https://github.com/orgs/qdu-rmcv/discussions/2)
 - ICP 模块使用了绝对路径引用，请特别注意调整和维护
+
+使用`map_server`进行二维地图的保存
+
+```bash
+ros2 run nav2_map_server map_saver_cli -t map -f map
+```
+
+建图完成后，在/目录下存在laboratory的pgm和yaml文件
